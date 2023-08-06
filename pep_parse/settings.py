@@ -11,7 +11,7 @@ ROBOTSTXT_OBEY = True
 ALLOWED_DOMAIN = 'peps.python.org'
 
 FEEDS = {
-    'results/pep_%(time)s.csv': {
+    f'{RESULTS_DIR}/pep_%(time)s.csv': {
         'format': 'csv',
         'fields': ['number', 'name', 'status'],
         'overwrite': True

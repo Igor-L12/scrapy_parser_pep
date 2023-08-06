@@ -8,7 +8,7 @@ class PepSpider(scrapy.Spider):
     """Парсер."""
     name = 'pep'
     allowed_domains = [ALLOWED_DOMAIN]
-    start_urls = [f'https://{ALLOWED_DOMAIN}/']
+    start_urls = [f'https://{domain}/' for domain in allowed_domains]
 
     def parse(self, response):
         """Начальный парсинг."""
@@ -18,7 +18,7 @@ class PepSpider(scrapy.Spider):
 
     def parse_pep(self, response):
         """Извлечение информации."""
-        header = ''.join(response.xpath('//article//h1//text()').getall())
+        header = response.css('article h1::text').get()
         number, name = header.split(' – ', 1)
         yield PepParseItem(
             {
